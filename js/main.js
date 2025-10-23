@@ -146,8 +146,13 @@ class Ball extends Shape{
 
 const balls = [];
 const evil = new EvilCircle(30,30);
+ballCount = 0;
 
-while (balls.length < 25) {
+while (ballCount <= 25) {
+  summonBall();
+}
+
+function summonBall(){
   const size = random(10, 20);
   const ball = new Ball(
     // ball position always drawn at least one ball width
@@ -161,8 +166,8 @@ while (balls.length < 25) {
   );
 
   balls.push(ball);
+  ballCount++;
 }
-ballCount = 25;
 
 function loop() {
   ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
