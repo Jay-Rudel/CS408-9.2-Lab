@@ -29,7 +29,7 @@ class Shape {
 class EvilCircle extends Shape{
   constructor(x, y){
     super(x, y, 20, 20);
-    this.color = white;
+    this.color = "white";
     this.exists = true;
     this.size = 10;
 
@@ -61,19 +61,19 @@ class EvilCircle extends Shape{
 
   checkBounds() {
     if (this.x + this.size >= width) {
-      this.X = width - this.size;
+      this.x = width - this.size;
     }
 
     if (this.x - this.size <= 0) {
-      this.X = this.size;
+      this.x = this.size;
     }
 
     if (this.y + this.size >= height) {
-      this.Y = height - this.size;
+      this.y = height - this.size;
     }
 
     if (this.y - this.size <= 0) {
-      this.Y = this.size;
+      this.y = this.size;
     }
   }
 
@@ -144,6 +144,7 @@ class Ball extends Shape{
 }
 
 const balls = [];
+const evil = new EvilCircle(30,30);
 
 while (balls.length < 25) {
   const size = random(10, 20);
@@ -166,11 +167,16 @@ function loop() {
   ctx.fillRect(0, 0, width, height);
 
   for (const ball of balls) {
-    ball.draw();
-    ball.update();
-    ball.collisionDetect();
+    if(ball.exists){
+      ball.draw();
+      ball.update();
+      ball.collisionDetect();
+    }
   }
 
+  evil.draw();
+  evil.checkBounds();
+  evil.collisionDetect();
   requestAnimationFrame(loop);
 }
 
